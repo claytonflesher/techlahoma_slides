@@ -53,6 +53,6 @@ class MeetupsList
           venue:    venue
         )
       end.sort_by { |event| event.date }.first
-    end.compact
+    end.compact.sort_by { |event| event.date }
   end
 end
