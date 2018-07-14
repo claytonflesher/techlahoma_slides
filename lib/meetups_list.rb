@@ -1,8 +1,8 @@
-require 'net/http'
+require 'date'
 require 'json'
+require 'net/http'
 require_relative 'event'
 require_relative 'venue'
-require 'date'
 
 class MeetupsList
   NAMES = [
@@ -36,23 +36,35 @@ class MeetupsList
     NAMES.map do |name|
       path = '/' << name << '/events'
       events = JSON.parse(Net::HTTP.get('api.meetup.com', path))
-      events.map do |event|
-        venue = Venue.new(
-          name:    event['venue']['name'],
-          address: event['venue']['address_1'],
-          city:    event['venue']['city'],
-          country: event['venue']['country'],
-          state:   event['venue']['state']
-        )
-        Event.new(
-          group:    event['group']['name'],
-          title:    event['name'],
-          duration: event['duration'].to_i / 3600000,
-          date:     Date.parse(event['local_date']),
-          time:     Time.parse(event['local_time']),
-          venue:    venue
-        )
-      end.sort_by { |event| event.date }.first
+      build_events(events).sort_by { |event| event.date }.first
     end.compact.sort_by { |event| event.date }
+  end
+
+  def build_events(events)
+    events.map do |event|
+      venue = build_venue(event)
+      build_event(event, venue)
+    end
+  end
+
+  def build_venue(event)
+    Venue.new(
+      name:    event['venue']['name'],
+      address: event['venue']['address_1'],
+      city:    event['venue']['city'],
+      country: event['venue']['country'],
+      state:   event['venue']['state']
+    )
+  end
+
+  def build_event(event, venue)
+    Event.new(
+      group:    event['group']['name'],
+      title:    event['name'],
+      duration: event['duration'].to_i / 3600000,
+      date:     Date.parse(event['local_date']),
+      time:     Time.parse(event['local_time']),
+      venue:    venue
+    )
   end
 end

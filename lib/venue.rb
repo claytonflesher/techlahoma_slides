@@ -1,5 +1,3 @@
-require 'json'
-
 class Venue
   def initialize(name:, address:, city:, country:, state:)
     @name    = name
@@ -10,8 +8,4 @@ class Venue
   end
 
   attr_reader :name, :address, :city, :country, :state
-
-  def to_s
-    "#{name}, #{address}, #{city}."
-  end
 end

@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'net/http'
 require_relative 'lib/meetups_list'
 set :port, ENV['PORT'] || 4567
 

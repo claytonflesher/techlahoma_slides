@@ -1,5 +1,3 @@
-require 'json'
-
 class Event
   def initialize(group:, title:, duration:, date:, time:, venue:)
     @group    = group
@@ -11,8 +9,4 @@ class Event
   end
 
   attr_reader :group, :title, :duration, :date, :time, :venue
-
-  def to_s
-    "Group: #{group} Title: #{title} Date: #{date} Time: #{time} Duration: #{duration} hour(s) Venue: #{venue}"
-  end
 end
