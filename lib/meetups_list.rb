@@ -42,14 +42,22 @@ class MeetupsList
 
   def build_events(events)
     events.map do |event|
-      puts event
-      venue = build_venue(event)
+      if event['venue'] != nil
+        venue = build_venue(event)
+      else
+        venue = Venue.new(
+          name: '',
+          address: '',
+          city: '',
+          country: '',
+          state: ''
+        )
+      end
       build_event(event, venue)
     end
   end
 
   def build_venue(event)
-    puts event
     Venue.new(
       name:    event['venue']['name'] || '',
       address: event['venue']['address_1'] || '',
