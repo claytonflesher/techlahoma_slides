@@ -42,8 +42,8 @@ class MeetupsList
 
   def build_events(events)
     events.map do |event|
-      venue = build_venue(event)
-      build_event(event, venue)
+      venue = build_venue(event) if event != nil
+      build_event(event, venue) if event != nil
     end
   end
 
