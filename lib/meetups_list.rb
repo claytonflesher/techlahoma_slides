@@ -49,11 +49,11 @@ class MeetupsList
 
   def build_venue(event)
     Venue.new(
-      name:    event['venue']['name'],
-      address: event['venue']['address_1'],
-      city:    event['venue']['city'],
-      country: event['venue']['country'],
-      state:   event['venue']['state']
+      name:    event['venue']['name'] || '',
+      address: event['venue']['address_1'] || '',
+      city:    event['venue']['city'] || '',
+      country: event['venue']['country'] || '',
+      state:   event['venue']['state'] || ''
     )
   end
 
