@@ -48,6 +48,7 @@ class MeetupsList
   end
 
   def build_venue(event)
+    puts event
     Venue.new(
       name:    event['venue']['name'] || '',
       address: event['venue']['address_1'] || '',
