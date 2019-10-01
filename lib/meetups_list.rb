@@ -6,24 +6,25 @@ require_relative 'venue'
 
 class MeetupsList
   NAMES = [
-    'big-data-in-oklahoma-city',
-    'freecodecampokc',
+    'Big-Data-in-Oklahoma-City',
+    'cocoaheads-okc',
     'devopsokc',
+    'freecodecamp-norman',
+    'freecodecampokc',
+    'ok-indiehackers',
+    'okc-analytics',
+    'okc-design-tech',
     'okc-fp',
     'okc-js',
-    'okc-lugnuts',
     'okc-osh',
     'okc-ruby',
-    'okc-sharepoint-user-group',
-    'okc-wordpress-users-group',
     'okc-sharp',
     'okcjug',
-    'okcphp',
     'okcpython',
     'okcsql',
-    'oklahoma-game-developers',
-    'refresh-okc',
-    'shecodesokc',
+    'Oklahoma-Game-Developers',
+    'ProductTank-OKC',
+    'shecodesokc'
   ]
 
   def next_events
@@ -68,10 +69,12 @@ class MeetupsList
   end
 
   def build_event(event, venue)
+    hours = event['duration'].to_i / (1000 * 60 * 60)
+    minutes = event['duration'] / (1000 * 60) % 60
     Event.new(
       group:    event['group']['name'],
       title:    event['name'],
-      duration: event['duration'].to_i / 3600000,
+      duration: "#{hours} hours #{minutes} minutes",
       date:     Date.parse(event['local_date']),
       time:     Time.parse(event['local_time']),
       venue:    venue
