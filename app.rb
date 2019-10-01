@@ -5,5 +5,5 @@ set :port, ENV['PORT'] || 4567
 get '/' do
   status 200
   @events ||= MeetupsList.new.next_events
-  erb :index
+  erb :'index.html'
 end

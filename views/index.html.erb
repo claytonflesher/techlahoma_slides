@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Techlahoma Meetups</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+      body {
+          font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+          font-family: 'Yanone Kaffeesatz';
+          font-weight: normal;
+      }
+      .remark-code, .remark-inline-code {
+          font-family: 'Ubuntu Mono';
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+        class: middle left
+        # techlahoma.org
+        ***
+        ### non-profit volunteer-run organization
+        ### hosts 39 groups and 2 conferences
+        ### sponsors free local events
+        ### supports the grassroots tech community of Oklahoma
+        ---
+        class: middle left
+        # Slack
+        ***
+        ### &#35;speakers, &#35;tech-talk, &#35;random, &#35;jobs and over 100 other topics.
+        ### More info at techlahoma.org/spaces
+        ### Sign up at slack.techlahoma.org
+        ---
+        class: middle left 
+        # Code of Conduct
+        # techlahoma.org/code-of-conduct 
+        ***
+        # Incident Report:
+        # techlahoma.org/incident
+        ---
+        class: middle left
+        # StarSpace46.com
+        ***
+        ## This event space is donated by StarSpace46
+        ## Free day pass to anyone who wants to go upstairs after meetups during business hours.
+        ## starspace46.com/membership-inquiry
+        ## Slack: &#35;starspace46
+        ---
+        class: middle left
+        # Volunteers Needed
+        ***
+        ## Want to get more involved?
+        ## help-wanted.techlahoma.org
+        ---
+        <% @events.each do |event| %>
+        class: middle left
+        # <%= event.group %>
+        ***
+        ## <%= event.title %>
+        ### <%= event.date.strftime("%A, %B %d") %> @ <%= event.time.strftime("%l:%M %P") %>
+        ### Location: <%= event.venue.name %>
+        #### Duration: <%= event.duration %>
+        ---
+        <% end %>
+        class: middle left
+        # twitch.tv/techlahoma
+        ***
+        ## We've been streaming almost all of our meetups in Oklahoma City to Twitch.
+        ## Subscribe to our channel for free every if you have Amazon Prime.
+        ## Techlahoma gets a small donation for each subscription!
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script>
+      var slideshow = remark.create();
+      setInterval(function () {carousel(slideshow)}, 8000);
+      
+      function carousel(varObject) {
+          var slideCount = varObject.getSlideCount()-1;
+          var currentSlide = varObject.getCurrentSlideIndex();
+          // if the slideshow is on the last slide, go back to the first slide; if not, call gotoNextSlide();
+          if (currentSlide == slideCount) {
+              varObject.gotoFirstSlide();
+          }
+          else { varObject.gotoNextSlide(); }
+      }
+    </script>
+  </body>
+</html>
